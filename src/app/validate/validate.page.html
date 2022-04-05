@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="secondary">
+    <ion-title>Assigner un conseiller</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/tab1"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar placeholder="Rechercher ..." [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}"  (keyup)="filterList($event)"></ion-searchbar>
+  <ion-list>
+    <ion-item *ngFor="let item of info">
+      <ion-avatar item-start>
+        <img [src]="item.photoURL">
+      </ion-avatar>
+      <ion-label>
+        <h2 style="padding-left:5px;">{{item.lName}} {{item.fName}}</h2>
+        <p style="padding-left:5px;">{{item.email}}</p>
+        <p style="padding-left:5px;">{{item.phone}}</p>
+      </ion-label>
+      <ion-badge *ngIf="item.id != myChats.assignTo" (click)="validate(item)" color="secondary" slot="end">Assigner</ion-badge>
+      <ion-badge *ngIf="item.id == myChats.assignTo" (click)="unValidate(item)" color="secondary" slot="end">Retirer</ion-badge>
+    </ion-item>
+  </ion-list>
+</ion-content>

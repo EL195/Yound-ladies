@@ -1,17 +1,140 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
+  <ion-toolbar class="productHeader">
+    <ion-title color="secondary">Mon compte</ion-title>
+    <ion-buttons slot="end" (click)="logOut()">
+      <ion-button color="primary">
+        <ion-icon color="secondary" name="log-in-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/tab1"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+
+<ion-content>
+  <ion-fab *ngIf="!edit" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="edit = !edit" color="primary">
+      <ion-icon name="create"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-grid no-padding>
+    <ion-row id="img-bkg">
+      <ion-col no-padding>
+        <div class="user-photo" padding-top>
+          <ion-avatar *ngIf="user.photoURL else defaultPhoto">
+            <img [src]="user.photoURL">
+          </ion-avatar>
+          <ng-template #defaultPhoto>
+            <ion-avatar>
+              <img src="../../assets/avatar.png">
+            </ion-avatar>
+          </ng-template>
+          <ion-row class="act" justify-content-center>
+            <ion-button (click)="takePic()"><ion-icon slot="icon-only" name="camera"></ion-icon></ion-button>
+            <ion-button (click)="editPassword()" color="primary" expand="block">  Changer Mot De Passe  </ion-button>
+          </ion-row>
+        </div>
+      </ion-col>
+    </ion-row>
+
+  <ion-row>
+
+    <ion-col *ngIf="!edit">
+      <ion-list>
+        <ion-item>
+          <ion-icon name="person" slot="start"></ion-icon>
+          <ion-label>
+            <p>Nom et Prenom</p>
+            <h2>{{user.fName}} {{user.lName}}</h2>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="mail" slot="start"></ion-icon>
+          <ion-label>
+            <p>Email</p>
+            <h2>{{user.email}}</h2>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="call" slot="start"></ion-icon>
+          <ion-label>
+            <p>Tel</p>
+            <h2>{{user.phone}}</h2>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="jet" slot="start"></ion-icon>
+          <ion-label>
+            <p>Pays</p>
+            <h2>{{user.pays}}</h2>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="train" slot="start"></ion-icon>
+          <ion-label>
+            <p>Region</p>
+            <h2>{{user.region}}</h2>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="car" slot="start"></ion-icon>
+          <ion-label>
+            <p>Ville</p>
+            <h2>{{user.ville}}</h2>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="pin" slot="start"></ion-icon>
+          <ion-label>
+            <p>Adresse</p>
+            <h2>{{user.address}}</h2>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+    <ion-col *ngIf="edit">
+      <form #f="ngForm" (ngSubmit)="editProfile(f)">
+        <ion-item>
+          <ion-label position="floating">Nom</ion-label>
+          <ion-input name="fName" type="text" [(ngModel)]="user.fName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Prénom</ion-label>
+          <ion-input name="lName" type="text" [(ngModel)]="user.lName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input name="email" type="text" [(ngModel)]="user.email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Téléphone</ion-label>
+          <ion-input name="tel" type="text" [(ngModel)]="user.phone"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Pays</ion-label>
+          <ion-input name="pays" type="text" [(ngModel)]="user.pays"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Région</ion-label>
+          <ion-input name="region" type="text" [(ngModel)]="user.region"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Ville</ion-label>
+          <ion-input name="ville" type="text" [(ngModel)]="user.ville"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Adresse</ion-label>
+          <ion-input name="address" type="text" [(ngModel)]="user.address"></ion-input>
+        </ion-item>
+        <ion-row style="padding:15px;" padding justify-content-center>
+          <ion-button color="warning" class="saveBtn" type="submit">Modifier</ion-button>
+        </ion-row>
+      </form>
+    </ion-col>
+  </ion-row>
+  </ion-grid>
 </ion-content>

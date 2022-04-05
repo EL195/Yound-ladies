@@ -1,0 +1,103 @@
+
+<ion-header>
+  <ion-toolbar class="productHeader">
+    <ion-buttons slot="start" color="secondary">
+      <ion-back-button class="white" defaultHref="/tabs/tab1"> </ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end" >
+      <ion-button color="light" (click)="login()">
+        Connectez-vous
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-grid class="grid1">
+      <ion-row class="row1">
+          <ion-col>
+  
+          </ion-col>
+      </ion-row>
+  
+      <ion-row class="row2">
+          <ion-col>
+  
+          </ion-col>
+      </ion-row>
+  
+  </ion-grid>
+  
+  <ion-slide>
+      <div class="contaier-login">
+          <ion-grid>
+              <ion-row>
+                  <ion-col>
+                      <h1>Nouveau compte</h1>
+                  </ion-col>
+              </ion-row>
+              <ion-row>
+                  <ion-col>
+                      <ion-list>
+
+                        <ion-item class="round">
+                          <ion-icon color="secondary" name="help-outline" class="icon-login"></ion-icon>
+                          <ion-label>Que voulez-vous ?</ion-label>
+                          <ion-select name="role"  [(ngModel)]="role">
+                            <ion-select-option value="beneficiary">J'ai besoin d'aide</ion-select-option>
+                            <ion-select-option value="advisor">Je souhaite aider</ion-select-option>
+                          </ion-select>
+                        </ion-item>
+                        <br />
+
+
+                        <ion-item class="round">
+                          <ion-icon color="secondary" name="person" class="icon-login"></ion-icon>
+                          <ion-input  type="text" name="name"  [(ngModel)]="name" required placeholder="Michel"></ion-input>
+                        </ion-item>
+                        <br />
+
+
+                          <ion-item class="round">
+                              <ion-icon color="secondary" name="mail-outline" class="icon-login"></ion-icon>
+                              <ion-input name="email" name="email"  [(ngModel)]="email" type="text" required placeholder="hello@micheltanga.com"></ion-input>
+                          </ion-item>
+                          <br />
+
+                          <ion-item class="round">
+                            <ion-icon color="secondary" name="call-outline" class="icon-login"></ion-icon>
+                            <ion-intl-tel-input 
+                              id="phone-number" 
+                              name="phone-number"                              [defaultCountryiso]="CIV"
+                              enableAutoCountrySelect="true"
+                              modalTitle="Sélectionner votre pays"
+                              modalCloseText="Fermer"
+                              modalCanSearch="true"
+                              [(ngModel)]="phoneNumber" 
+                              #phoneNumberControl="ngModel" >
+                            </ion-intl-tel-input>
+                          </ion-item>
+                          <br />
+
+
+                          <ion-item class="round"> 
+                              <ion-icon color="secondary" name="lock-closed-outline" class="icon-login"></ion-icon> 
+                              <ion-input [type]="passwordType"  name="password"  [(ngModel)]="password"  clearOnEdit="false"></ion-input>
+                              <ion-icon slot="end" [name]="passwordIcon" class="passwordIcon" (click)="hideShowPassword()"></ion-icon>
+                          </ion-item>
+  
+                      </ion-list>
+                  </ion-col>
+              </ion-row>
+              <ion-row>
+                  <ion-col>
+                      <ion-button  (click)="registering()" color="secondary" shape="round" type="submit" fill="solid" expand="full">
+                          Je m'enregistre
+                      </ion-button>
+                  </ion-col>
+              </ion-row>
+          </ion-grid>
+      </div>
+  </ion-slide>
+  

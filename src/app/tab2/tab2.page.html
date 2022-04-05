@@ -1,17 +1,29 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+  <ion-toolbar class="productHeader">
+    <ion-title color="secondary">Consillers</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/tab1"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+<ion-content [fullscreen]="true">
+<ion-searchbar placeholder="Rechercher ..." [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}"  (keyup)="filterList($event)"></ion-searchbar>
+<div *ngIf="user.role=='admin'">
+  <ion-list>
+    <ion-item *ngFor="let item of info" (click)="validate(item)">
+      <ion-avatar item-start>
+        <img [src]="item.photoURL">
+      </ion-avatar>
+      <ion-label>
+        <h2 style="padding-left:5px;">{{item.lName}} {{item.fName}}</h2>
+        <p style="padding-left:5px;">{{item.email}}</p>
+        <p style="padding-left:5px;">{{item.phone}}</p>
+      </ion-label>
+      <ion-badge color="secondary" *ngIf="item.visible==true" slot="end">Validé</ion-badge>
+      <ion-badge color="primary" *ngIf="item.visible==false" slot="end">En attente de validation</ion-badge>
+    </ion-item>
+  </ion-list>
+</div>
 </ion-content>

@@ -1,17 +1,85 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+  <ion-toolbar class="productHeader">
+    <ion-title color="secondary">YLSU</ion-title>
+    <ion-buttons *ngIf="user.role=='advisor' || user.role=='beneficiary'" slot="end" (click)="profil()">
+      <ion-button color="primary">
+        <ion-icon color="secondary" name="person-circle-outline"></ion-icon>
+        <ion-label color="secondary">Profil</ion-label>
+      </ion-button>
+    </ion-buttons> 
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
-</ion-content>
+
+
+
+<ion-content [fullscreen]="true">
+  <ion-searchbar placeholder="Rechercher ..." [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}"  (keyup)="filterList($event)"></ion-searchbar>
+    <!-- fab placed to the top end -->
+    <ion-fab *ngIf="user.role=='beneficiary'" (click)="create()" vertical="bottom" color="secondary" horizontal="end" slot="fixed">
+      <ion-fab-button color="secondary">
+        <ion-icon name="send-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+
+  <ion-list>
+
+    <ion-list-header> Récentes Conversations </ion-list-header>
+    <br>
+ 
+
+   <div *ngIf="user.role=='beneficiary'">
+      <ion-item *ngFor="let item of myChats" lines="none" (click)="myChat(item)">
+        <ion-avatar slot="start">
+          <img src="./avatar-finn.png" />
+        </ion-avatar>
+        <ion-label>
+          <h2 *ngIf="item.visible==true">Consiller : {{item.assignToName}}</h2>
+          <h3>{{item.title}}</h3>
+          <p>{{item.description}}</p>
+        </ion-label>
+        <ion-badge slot="end">
+          <ion-icon *ngIf="item.visible==true" name="checkmark-circle-outline"></ion-icon>
+          <ion-icon *ngIf="item.visible==false"name="close-circle-outline"></ion-icon>
+        </ion-badge>
+      </ion-item>
+   </div>
+
+
+   <div *ngIf="user.role=='advisor'">
+    <ion-item *ngFor="let item of myChats" lines="none" (click)="myChat(item)">
+      <ion-avatar slot="start">
+        <img [src]="item.createdByUrl" />
+      </ion-avatar>
+      <ion-label>
+        <h2 *ngIf="item.visible==true">Consiller : {{item.assignToName}}</h2>
+        <h3>{{item.title}}</h3>
+        <p>{{item.description}}</p>
+      </ion-label>
+      <ion-badge slot="end">
+        <ion-icon *ngIf="item.visible==true" name="checkmark-circle-outline"></ion-icon>
+        <ion-icon *ngIf="item.visible==false"name="close-circle-outline"></ion-icon>
+      </ion-badge>
+    </ion-item>
+ </div>
+
+
+
+ <div *ngIf="user.role=='admin'">
+  <ion-item *ngFor="let item of myChats" lines="none" (click)="adminChat(item)">
+    <ion-avatar slot="start">
+      <img [src]="item.createdByUrl" />
+    </ion-avatar>
+    <ion-label>
+      <h2 *ngIf="item.visible==true">Consiller : {{item.assignToName}}</h2>
+      <h3>{{item.title}}</h3>
+      <p>{{item.description}}</p>
+    </ion-label>
+    <ion-badge slot="end">
+      <ion-icon color="secondary" *ngIf="item.visible==true" name="checkmark-circle-outline"></ion-icon>
+      <ion-icon color="secondary" *ngIf="item.visible==false"name="close-circle-outline"></ion-icon>
+    </ion-badge>
+  </ion-item>
+</div>

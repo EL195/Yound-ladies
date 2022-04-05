@@ -1,0 +1,31 @@
+.user-photo ion-avatar {
+    margin: 0 auto;
+    width: 120px;
+    height: 120px;
+  }
+
+  #img-bkg {
+    background-color: var(#d7d8da);
+  }
+
+  ion-list {
+    margin-top: 12px;
+    p {
+      font-size: 12px;
+      font-weight: 400;
+      padding-bottom: 4px;
+    };
+    h2 {
+      font-weight: 400;
+      opacity: .5;
+    }
+  }
+
+  .saveBtn {
+    margin: 0 auto;
+  }
+
+  .act {
+    display: flex;
+    margin-left: 30px;
+  }

@@ -1,0 +1,47 @@
+.chat {
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+  }
+  
+  .message {
+    border-radius: 5px;
+    margin: 0.2em 0;
+    padding: 0.5em;
+    max-width: 50%;
+  }
+  .right{
+      float:right;
+  }
+
+  div.inline { float:left; }
+.clearBoth { clear:both; }
+
+
+  h4 {
+    font-size: 12px;
+    margin-top: 0px;
+}
+p{
+    font-size: 10px; 
+}
+  
+  .me {
+    align-self: flex-start;
+    background-color:  #2dd36f;
+    color: white;
+    padding-bottom: 25px;
+  }
+  
+  .you {
+    align-self: flex-end;
+    background-color: #3171e0;
+    color: white;
+    float: right;
+  }
+
+  .send{
+      padding-left:15px;
+      padding-right:15px;
+  }
